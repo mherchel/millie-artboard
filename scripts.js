@@ -23,14 +23,17 @@
   function draw(e) {
     if (!isDrawing) return;
 
+    positionX = (e.touches) ? e.touches['0'].clientX : e.offsetX;
+    positionY = (e.touches) ? e.touches['0'].clientY : e.offsetY;
+
     ctx.beginPath();
     ctx.strokeStyle = 'hsl(' + hue + ', 100%, 50%)';
     ctx.moveTo(lastX, lastY);
-    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.lineTo(positionX, positionY);
     ctx.lineWidth = lineWidth;
     ctx.stroke();
 
-    [lastX, lastY] = [e.offsetX, e.offsetY];
+    [lastX, lastY] = [positionX, positionY]
   }
 
   function updateLineWidth(e) {
@@ -48,12 +51,20 @@
     [lastX, lastY] = [e.offsetX, e.offsetY];
   });
 
+  canvas.addEventListener('touchstart', (e) => {
+    isDrawing = true;
+    [lastX, lastY] = [e.offsetX, e.offsetY]
+  });
+
   updateHue();
   updateLineWidth();
 
-  canvas.addEventListener('mouseenter', (e) => [lastX, lastY] = [e.offsetX, e.offsetY] );
-  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mouseenter', (e) => [lastX, lastY] = [e.offsetX, e.offsetY]);
   document.addEventListener('mouseup', () => isDrawing = false);
+
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('touchmove', draw);
+
   inputLineWidth.addEventListener('input', updateLineWidth);
   buttonClear.addEventListener('click', () => ctx.clearRect(0, 0, canvas.width, canvas.height));
   inputHue.addEventListener('input', updateHue);

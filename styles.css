@@ -1,34 +1,58 @@
 * {
   box-sizing: border-box;
 }
+
 body {
   margin: 0;
 }
+
 canvas {
   cursor: crosshair;
   margin: 0 auto;
 }
+
 input[type="range"] {
-  width: calc(80% - 40px);
+  margin: 20px 0;
+  width: calc(100% - 40px);
 }
+
 .controls {
-  display: flex;
-  width: 90%;
+  position: fixed;
+  left: 2px;
+  bottom: 0;
+  width: 100%;
   margin: 0 auto;
 }
-.controls > * {
-  flex: 1;
-}
+
 .btn-clear {
   flex-basis: 100px;
   flex-grow: 0;
 }
+
 .hue-current {
   display: inline-block;
   vertical-align: top;
   width: 20px;
   height: 20px;
 }
+
 .width-current {
-  display: inline;
+  display: inline-block;
+  width: 20px;
+}
+
+@media (min-width: 600px) {
+  input[type="range"] {
+    margin: 0;
+  }
+
+  .controls {
+    position: static;
+    display: flex;
+    width: 90%;
+  }
+
+  .controls > * {
+    flex: 1;
+  }
 }
