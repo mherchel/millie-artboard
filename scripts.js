@@ -23,6 +23,8 @@
   function draw(e) {
     if (!isDrawing) return;
 
+    e.preventDefault();
+
     positionX = (e.touches) ? e.touches['0'].clientX : e.offsetX;
     positionY = (e.touches) ? e.touches['0'].clientY : e.offsetY;
 
