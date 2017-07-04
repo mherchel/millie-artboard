@@ -6,6 +6,7 @@
   const buttonClear = document.querySelector('.btn-clear');
   const hueCurrent = document.querySelector('.hue-current');
   const widthCurrent = document.querySelector('.width-current');
+  const quickButtons = document.querySelectorAll('.btn-quick');
 
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight - 80;
@@ -34,7 +35,6 @@
     ctx.lineTo(positionX, positionY);
     ctx.lineWidth = lineWidth;
     ctx.stroke();
-
     [lastX, lastY] = [positionX, positionY]
   }
 
@@ -46,6 +46,15 @@
   function updateHue(e) {
     hue = (e) ? e.target.valueAsNumber : inputHue.valueAsNumber;
     hueCurrent.style.backgroundColor = 'hsl(' + hue + ', 100%, 50%)';
+  }
+
+  function quickColorChange(e) {
+    hslValue = e.target.dataset.hsl;
+    e.target.style.backgroundColor = 'hsl(' + hslValue + ', 100%, 50%)';
+
+    hue =  hslValue;
+    hueCurrent.style.backgroundColor = 'hsl(' + hslValue + ', 100%, 50%)';
+
   }
 
   document.addEventListener('mousedown', (e) => {
@@ -70,5 +79,19 @@
   inputLineWidth.addEventListener('input', updateLineWidth);
   buttonClear.addEventListener('click', () => ctx.clearRect(0, 0, canvas.width, canvas.height));
   inputHue.addEventListener('input', updateHue);
+
+  quickButtons.forEach(function(el) {
+    el.addEventListener('click', quickColorChange);
+
+    var event = new MouseEvent('click', {
+      'view': window,
+      'bubbles': true,
+      'cancelable': true
+    });
+
+    el.dispatchEvent(event);
+  });
+
+
 
 })();

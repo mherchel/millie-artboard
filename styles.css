@@ -16,12 +16,26 @@ input[type="range"] {
   width: calc(100% - 40px);
 }
 
+button {
+  -webkit-appearance: none;
+  border: none;
+}
+
 .controls {
   position: fixed;
   left: 2px;
   bottom: 0;
   width: 100%;
   margin: 0 auto;
+}
+
+.container-quickcolor {
+  display: flex;
+  height: 40px;
+}
+
+.container-quickcolor > * {
+  flex: 1;
 }
 
 .btn-clear {
