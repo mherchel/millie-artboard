@@ -8,6 +8,7 @@
   const widthCurrent = document.querySelector('.width-current');
   const quickButtons = document.querySelectorAll('.btn-quick');
   const blendModeChanger = document.querySelector('.blend');
+  const buttonErase = document.querySelector('.btn-erase');
   const toggleControlBtn = document.querySelector('.btn-controls');
   const controlsWrapper = document.querySelector('.controls');
 
@@ -68,6 +69,13 @@
     [lastX, lastY] = [e.offsetX, e.offsetY];
   }
 
+  function eraser() {
+    blendMode = 'destination-out';
+    buttonErase.classList.toggle('js-enabled');
+
+    if (!buttonErase.classList.contains('js-enabled')) blendMode = blendModeChanger.value;
+  }
+
   function toggleControls(action) {
     if (action === 'close') {
       controlsWrapper.classList.remove('js-expanded');
@@ -95,6 +103,7 @@
   buttonClear.addEventListener('click', () => ctx.clearRect(0, 0, canvas.width, canvas.height));
   inputHue.addEventListener('input', updateHue);
   blendModeChanger.addEventListener('change', (e) => blendMode = e.target.value);
+  buttonErase.addEventListener('click', eraser);
   toggleControlBtn.addEventListener('click', toggleControls);
 
   for (let el of quickButtons) {

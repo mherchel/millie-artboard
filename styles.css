@@ -92,11 +92,36 @@ button {
   cursor: pointer;
 }
 
+.container-erase {
+  padding: 0;
+}
+
 .btn-clear {
   flex-basis: 80px;
   flex-grow: 0;
   background: transparent;
   cursor: pointer;
+}
+
+.btn-erase {
+  display: block;
+  padding: 0;
+  margin: 0 auto;
+  text-indent: -100vw;
+  width: 60px;
+  height: 120px;
+  overflow: hidden;
+  border-radius: 10px;
+  border: solid 5px #999;
+  background: transparent;
+  transform: rotate(80deg);
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.btn-erase.js-enabled {
+  background: pink;
+  border-color: #888;
 }
 
 .hue-current {
@@ -144,9 +169,8 @@ button {
   }
 
   .btn-clear {
-    flex-basis: 80px;
+    flex-basis: 0;
     flex-grow: 0;
-    margin-left: 20px;
   }
 
   .container {
@@ -155,5 +179,17 @@ button {
 
   .container-quickcolor {
     height: 40px;
+  }
+
+  .container-erase {
+    flex-basis: 150px;
+    flex-grow: 0;
+    padding: 20px 10px;
+  }
+
+  .btn-erase {
+    width: 30px;
+    height: 60px;
+    transform: rotate(30deg);
   }
 }
