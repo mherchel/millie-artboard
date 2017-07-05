@@ -54,7 +54,7 @@
 
     hue =  hslValue;
     hueCurrent.style.backgroundColor = 'hsl(' + hslValue + ', 100%, 50%)';
-
+    inputHue.value = hue;
   }
 
   document.addEventListener('mousedown', (e) => {
@@ -82,14 +82,7 @@
 
   quickButtons.forEach(function(el) {
     el.addEventListener('click', quickColorChange);
-
-    var event = new MouseEvent('click', {
-      'view': window,
-      'bubbles': true,
-      'cancelable': true
-    });
-
-    el.dispatchEvent(event);
+    el.click();
   });
 
 
