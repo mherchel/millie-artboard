@@ -4,6 +4,7 @@
 
 body {
   margin: 0;
+  overflow: hidden; /* Remove scrollbars. */
 }
 
 canvas {
@@ -39,6 +40,7 @@ button {
   transition: all .2s;
   background: #fafafa;
   box-shadow: -2px 0 5px 0 rgba(0, 0, 0, 0.3);
+  will-change: transform;
 }
 
 .controls.js-expanded {
@@ -118,6 +120,7 @@ button {
 
   .controls {
     display: flex;
+    align-items: center;
     top: auto;
     left: 0;
     bottom: 0;

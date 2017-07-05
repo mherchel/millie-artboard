@@ -11,8 +11,8 @@
   const toggleControlBtn = document.querySelector('.btn-controls');
   const controlsWrapper = document.querySelector('.controls');
 
-  canvas.width = window.innerWidth -14;
-  canvas.height = window.innerHeight -14;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
   ctx.lineJoin = 'round';
   ctx.lineCap = 'round';
 
@@ -25,6 +25,8 @@
 
   function draw(e) {
     if (!isDrawing) return;
+
+    if (window.innerWidth <= 600) toggleControls('close');
 
     e.preventDefault();
 
@@ -85,11 +87,6 @@
 
   document.addEventListener('mousedown', enableDraw);
   canvas.addEventListener('touchstart', enableDraw);
-  canvas.addEventListener('click', () => {
-    if (window.innerWidth <= 600) {
-      toggleControls('close');
-    }
-  });
   canvas.addEventListener('mouseenter', (e) => [lastX, lastY] = [e.offsetX, e.offsetY]);
   document.addEventListener('mouseup', () => isDrawing = false);
   canvas.addEventListener('mousemove', draw);
