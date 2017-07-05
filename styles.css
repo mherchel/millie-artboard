@@ -28,8 +28,8 @@ button {
 
 .controls {
   position: fixed;
-  left: 100%;
-  bottom: 0;
+  left: calc(100% + 10px);
+  top: 0;
   height: 100vh;
   width: calc(100vw - 70px);
   max-width: 400px;
@@ -38,15 +38,16 @@ button {
   -webkit-overflow-scrolling: touch;
   transition: all .2s;
   background: #fafafa;
+  box-shadow: -2px 0 5px 0 rgba(0, 0, 0, 0.3);
 }
 
 .controls.js-expanded {
-  transform: translatex(-100%);
+  transform: translatex(calc(-100% - 10px));
 }
 
 .btn-controls {
   position: absolute;
-  top: 20px;
+  top: 10px;
   right: calc(100% + 20px);
   height: 40px;
   width: 40px;
@@ -80,11 +81,12 @@ button {
 
 .container-quickcolor {
   display: flex;
-  height: 60px;
+  height: 80px;
 }
 
 .container-quickcolor > * {
   flex: 1;
+  margin-right: 1px;
   cursor: pointer;
 }
 
@@ -116,13 +118,13 @@ button {
 
   .controls {
     display: flex;
+    top: auto;
     left: 0;
     bottom: 0;
     width: 100%;
     max-width: none;
     height: auto;
     transform: translatey(100%);
-    background: transparent;
   }
 
   .controls.js-expanded {
