@@ -85,7 +85,11 @@
 
   document.addEventListener('mousedown', enableDraw);
   canvas.addEventListener('touchstart', enableDraw);
-  canvas.addEventListener('click', () => toggleControls('close'));
+  canvas.addEventListener('click', () => {
+    if (window.innerWidth <= 600) {
+      toggleControls('close');
+    }
+  });
   canvas.addEventListener('mouseenter', (e) => [lastX, lastY] = [e.offsetX, e.offsetY]);
   document.addEventListener('mouseup', () => isDrawing = false);
   canvas.addEventListener('mousemove', draw);
