@@ -69,7 +69,6 @@
     [lastX, lastY] = [e.offsetX, e.offsetY]
   });
 
-
   canvas.addEventListener('mouseenter', (e) => [lastX, lastY] = [e.offsetX, e.offsetY]);
   document.addEventListener('mouseup', () => isDrawing = false);
   canvas.addEventListener('mousemove', draw);
