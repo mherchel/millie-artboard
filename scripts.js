@@ -10,13 +10,11 @@
 
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight - 80;
-
-  let hue = inputHue.valueAsNumber;
-  let lineWidth = 20;
-
   ctx.lineJoin = 'round';
   ctx.lineCap = 'round';
 
+  let hue = inputHue.valueAsNumber;
+  let lineWidth = 20;
   let isDrawing = false;
   let lastX = 0;
   let lastY = 0;
@@ -72,19 +70,14 @@
 
   canvas.addEventListener('mouseenter', (e) => [lastX, lastY] = [e.offsetX, e.offsetY]);
   document.addEventListener('mouseup', () => isDrawing = false);
-
   canvas.addEventListener('mousemove', draw);
   canvas.addEventListener('touchmove', draw);
-
   inputLineWidth.addEventListener('input', updateLineWidth);
   buttonClear.addEventListener('click', () => ctx.clearRect(0, 0, canvas.width, canvas.height));
   inputHue.addEventListener('input', updateHue);
-
   quickButtons.forEach(function(el) {
     el.addEventListener('click', quickColorChange);
     el.click();
   });
-
-
 
 })();
