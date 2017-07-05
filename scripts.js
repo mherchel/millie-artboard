@@ -69,8 +69,6 @@
     [lastX, lastY] = [e.offsetX, e.offsetY]
   });
 
-  updateHue();
-  updateLineWidth();
 
   canvas.addEventListener('mouseenter', (e) => [lastX, lastY] = [e.offsetX, e.offsetY]);
   document.addEventListener('mouseup', () => isDrawing = false);
@@ -84,5 +82,8 @@
     el.addEventListener('click', quickColorChange);
     el.click();
   });
+
+  updateHue();
+  updateLineWidth();
 
 })();
