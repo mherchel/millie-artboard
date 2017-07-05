@@ -7,7 +7,7 @@
   const hueCurrent = document.querySelector('.hue-current');
   const widthCurrent = document.querySelector('.width-current');
   const quickButtons = document.querySelectorAll('.btn-quick');
-  const blendModeChanger = document.querySelector('.blend')
+  const blendModeChanger = document.querySelector('.blend');
 
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight - 80;
@@ -59,16 +59,13 @@
     inputHue.value = hue;
   }
 
-  document.addEventListener('mousedown', (e) => {
+  function enableDraw(e) {
     isDrawing = true;
     [lastX, lastY] = [e.offsetX, e.offsetY];
-  });
+  }
 
-  canvas.addEventListener('touchstart', (e) => {
-    isDrawing = true;
-    [lastX, lastY] = [e.offsetX, e.offsetY]
-  });
-
+  document.addEventListener('mousedown', enableDraw);
+  canvas.addEventListener('touchstart', enableDraw);
   canvas.addEventListener('mouseenter', (e) => [lastX, lastY] = [e.offsetX, e.offsetY]);
   document.addEventListener('mouseup', () => isDrawing = false);
   canvas.addEventListener('mousemove', draw);
@@ -77,10 +74,11 @@
   buttonClear.addEventListener('click', () => ctx.clearRect(0, 0, canvas.width, canvas.height));
   inputHue.addEventListener('input', updateHue);
   blendModeChanger.addEventListener('change', (e) => blendMode = e.target.value);
-  quickButtons.forEach(function(el) {
+
+  for (let el of quickButtons) {
     el.addEventListener('click', quickColorChange);
     el.click();
-  });
+  }
 
   updateHue();
   updateLineWidth();
