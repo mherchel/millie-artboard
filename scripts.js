@@ -7,6 +7,7 @@
   const hueCurrent = document.querySelector('.hue-current');
   const widthCurrent = document.querySelector('.width-current');
   const quickButtons = document.querySelectorAll('.btn-quick');
+  const blendModeChanger = document.querySelector('.blend')
 
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight - 80;
@@ -18,6 +19,7 @@
   let isDrawing = false;
   let lastX = 0;
   let lastY = 0;
+  let blendMode = blendModeChanger.value;
 
   function draw(e) {
     if (!isDrawing) return;
@@ -32,7 +34,9 @@
     ctx.moveTo(lastX, lastY);
     ctx.lineTo(positionX, positionY);
     ctx.lineWidth = lineWidth;
+    ctx.globalCompositeOperation = blendMode;
     ctx.stroke();
+
     [lastX, lastY] = [positionX, positionY]
   }
 
@@ -75,6 +79,7 @@
   inputLineWidth.addEventListener('input', updateLineWidth);
   buttonClear.addEventListener('click', () => ctx.clearRect(0, 0, canvas.width, canvas.height));
   inputHue.addEventListener('input', updateHue);
+  blendModeChanger.addEventListener('change', (e) => blendMode = e.target.value);
   quickButtons.forEach(function(el) {
     el.addEventListener('click', quickColorChange);
     el.click();
