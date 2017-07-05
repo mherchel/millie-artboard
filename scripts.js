@@ -9,6 +9,7 @@
   const quickButtons = document.querySelectorAll('.btn-quick');
   const blendModeChanger = document.querySelector('.blend');
   const toggleControlBtn = document.querySelector('.btn-controls');
+  const controlsWrapper = document.querySelector('.controls');
 
   canvas.width = window.innerWidth -14;
   canvas.height = window.innerHeight -14;
@@ -65,13 +66,26 @@
     [lastX, lastY] = [e.offsetX, e.offsetY];
   }
 
-  function toggleControls() {
-    document.querySelector('.controls').classList.toggle('js-expanded');
-    toggleControlBtn.classList.toggle('js-expanded');
+  function toggleControls(action) {
+    if (action === 'close') {
+      controlsWrapper.classList.remove('js-expanded');
+      toggleControlBtn.classList.remove('js-expanded');
+    }
+
+    else if (action === 'open') {
+      controlsWrapper.classList.add('js-expanded');
+      toggleControlBtn.classList.add('js-expanded');
+    }
+
+    else {
+      controlsWrapper.classList.toggle('js-expanded');
+      toggleControlBtn.classList.toggle('js-expanded');
+    }
   }
 
   document.addEventListener('mousedown', enableDraw);
   canvas.addEventListener('touchstart', enableDraw);
+  canvas.addEventListener('click', () => toggleControls('close'));
   canvas.addEventListener('mouseenter', (e) => [lastX, lastY] = [e.offsetX, e.offsetY]);
   document.addEventListener('mouseup', () => isDrawing = false);
   canvas.addEventListener('mousemove', draw);
