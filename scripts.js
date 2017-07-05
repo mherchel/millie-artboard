@@ -8,9 +8,10 @@
   const widthCurrent = document.querySelector('.width-current');
   const quickButtons = document.querySelectorAll('.btn-quick');
   const blendModeChanger = document.querySelector('.blend');
+  const toggleControlBtn = document.querySelector('.btn-controls');
 
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight - 80;
+  canvas.width = window.innerWidth -14;
+  canvas.height = window.innerHeight -14;
   ctx.lineJoin = 'round';
   ctx.lineCap = 'round';
 
@@ -64,6 +65,11 @@
     [lastX, lastY] = [e.offsetX, e.offsetY];
   }
 
+  function toggleControls() {
+    document.querySelector('.controls').classList.toggle('js-expanded');
+    toggleControlBtn.classList.toggle('js-expanded');
+  }
+
   document.addEventListener('mousedown', enableDraw);
   canvas.addEventListener('touchstart', enableDraw);
   canvas.addEventListener('mouseenter', (e) => [lastX, lastY] = [e.offsetX, e.offsetY]);
@@ -74,6 +80,7 @@
   buttonClear.addEventListener('click', () => ctx.clearRect(0, 0, canvas.width, canvas.height));
   inputHue.addEventListener('input', updateHue);
   blendModeChanger.addEventListener('change', (e) => blendMode = e.target.value);
+  toggleControlBtn.addEventListener('click', toggleControls);
 
   for (let el of quickButtons) {
     el.addEventListener('click', quickColorChange);
