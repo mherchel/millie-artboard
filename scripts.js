@@ -2,6 +2,7 @@
   const canvas = document.querySelector('canvas');
   const ctx = canvas.getContext('2d');
   const inputHue = document.querySelector('.hue');
+  const inputColor = document.querySelector('input[type="color"]');
   const inputLineWidth = document.querySelector('.width');
   const buttonClear = document.querySelector('.btn-clear');
   const hueCurrent = document.querySelector('.hue-current');
@@ -18,6 +19,8 @@
   ctx.lineCap = 'round';
 
   let hue = inputHue.valueAsNumber;
+  let color = inputColor.value;
+  let colorPicker = true;
   let lineWidth = 20;
   let isDrawing = false;
   let lastX = 0;
@@ -35,7 +38,12 @@
     positionY = (e.touches) ? e.touches['0'].clientY : e.offsetY;
 
     ctx.beginPath();
-    ctx.strokeStyle = 'hsl(' + hue + ', 100%, 50%)';
+    if (colorPicker) {
+      ctx.strokeStyle = color;
+    } else {
+      ctx.strokeStyle = 'hsl(' + hue + ', 100%, 50%)';
+    }
+    
     ctx.moveTo(lastX, lastY);
     ctx.lineTo(positionX, positionY);
     ctx.lineWidth = lineWidth;
@@ -53,6 +61,12 @@
   function updateHue(e) {
     hue = (e) ? e.target.valueAsNumber : inputHue.valueAsNumber;
     hueCurrent.style.backgroundColor = 'hsl(' + hue + ', 100%, 50%)';
+    colorPicker = false;
+  }
+
+  function updateColor(e) {
+    color = (e) ? e.target.value : inputHue.value
+    colorPicker = true;
   }
 
   function quickColorChange(e) {
@@ -102,6 +116,7 @@
   inputLineWidth.addEventListener('input', updateLineWidth);
   buttonClear.addEventListener('click', () => ctx.clearRect(0, 0, canvas.width, canvas.height));
   inputHue.addEventListener('input', updateHue);
+  inputColor.addEventListener('input', updateColor);
   blendModeChanger.addEventListener('change', (e) => blendMode = e.target.value);
   buttonErase.addEventListener('click', eraser);
   toggleControlBtn.addEventListener('click', toggleControls);
