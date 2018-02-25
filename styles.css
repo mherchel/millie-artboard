@@ -13,7 +13,18 @@ canvas {
 }
 
 input[type="range"] {
+  display: none;
   width: calc(100% - 30px);
+}
+
+@media (min-width: 1025px) {
+  input[type="range"] {
+    display: block;
+  }
+
+  input[type="color"] {
+    display: none;
+  }
 }
 
 select {
@@ -125,10 +136,16 @@ button {
 }
 
 .hue-current {
-  display: inline-block;
+  display: none;
   vertical-align: top;
   width: 20px;
   height: 20px;
+}
+
+@media (min-width: 1025px) {
+  .hue-current {
+    display: inline-block;
+  }
 }
 
 .width-current {
